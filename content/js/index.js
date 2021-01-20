@@ -1,6 +1,6 @@
 const wss = new WebSocket("ws://1.241.111.101:81");
     
-let textarea;
+let textarea = "";
 
     wss.onopen = (event) => {
         wss.send("님이 참가했습니다");
