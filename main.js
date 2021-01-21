@@ -2,7 +2,7 @@ const http = require("http");
 const fs = require("fs")
 const websocket = require("./src/socket");
 
-const date = new Date();
+
 
 const app = http.createServer((req, res) => {
     let url = req.url;
@@ -22,8 +22,18 @@ const app = http.createServer((req, res) => {
         res.end();
     })
     
-    console.log("Sent to " + req.connection.remoteAddress + "  " + date);
 });
 
-websocket({port : 81});
-app.listen(80);
+try {
+    websocket({port : 81});
+    console.log("WsServer Successfully Init!");
+} catch (e) {
+    console.error(e);
+}
+
+try {
+    app.listen(80);
+    console.log("WebServer Successfully Init!");
+} catch (e) {
+    console.error(e);
+}
