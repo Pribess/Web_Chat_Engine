@@ -4,7 +4,8 @@ let datec;
 
 let ClientArray = new Array();
 
-module.exports = (server) => {
+
+  module.exports = (server) => {
     const wss = new ws.Server(server);
     
     setInterval(() => {
@@ -12,24 +13,25 @@ module.exports = (server) => {
 
         datec = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
 
+        var userlist = "";
+        
+        for (var cnt=0; cnt < ClientArray.length; cnt++) {
+            userlist += ClientArray[cnt][1] + "\r\n";
+        }
+
+        for (var cnt=0; cnt < ClientArray.length; cnt++) {
+            ClientArray[cnt][0].send("ws1" + userlist);
+        }
     }, 1000);
+
 
     wss.on("connection", (ws, req) => {
         let ip = req.connection.remoteAddress.substring(7);
         
 
 
-        setInterval(() => {
-            var userlist = "";
-
-            for(var cnt_1 = 0 ; cnt_1 < ClientArray.length ; cnt_1++) {
-                for(var cnt_2 = 0 ; cnt_2 < ClientArray[cnt_2] ; cnt_2++) {
-                    console.log(cnt_1, cnt_2)
-                }
-            }
-        }, 1000);
-
-        ClientArray.push([ws, req]);
+        
+        ClientArray.push([ws, ip]);
 
         console.log("[" + datec + "]" + ip + " 로 부터 연결요청");
 
@@ -42,13 +44,14 @@ module.exports = (server) => {
         });
         ws.on("close", () => {
             console.log("[" + datec + "]" + ip + " 님이 퇴장하였습니다");
-            BroadcastAll(" 님이 퇴장하였습니다");
+            BroadcastAll(" 님이 퇴장하였습니다", ip);
+            ClientArray.splice(ClientArray.indexOf([ws, req]), 1);
         });
     });
 }
 
 function BroadcastAll (msg, ip) {
     for (var cnt=0; cnt < ClientArray.length; cnt++) {
-        ClientArray[cnt][0].send("[" + datec + "]" + "(" + ip + ") : " + msg);
+        ClientArray[cnt][0].send("ws0[" + datec + "]" + "(" + ip + ") : " + msg);
     }
 }
