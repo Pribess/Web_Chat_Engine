@@ -20,6 +20,9 @@ let ClientArray = new Array();
         console.log("[" + GetTime() + "]" + ip + " 로 부터 연결요청");
 
         ws.on("message", (msg) => {
+            if (msg.startsWith("ws2")) {
+                console.log(msg);
+            }
             console.log("[" + GetTime() + "]" + ip + " 로부터 받은 메세지 : " + msg);
             SendUserlist();
             BroadcastAll(msg, ip);

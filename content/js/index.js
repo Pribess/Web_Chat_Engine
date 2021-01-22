@@ -11,7 +11,6 @@ var textarea = "";
             PrintChat(event.data.substring(3));
         } else if (event.data.toString().startsWith("ws1")) {
             PrintOnline(event.data.substring(3));
-            console.log(event.data.substring(3))
         }
     }
     
