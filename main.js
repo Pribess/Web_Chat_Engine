@@ -8,7 +8,7 @@ const app = http.createServer((req, res) => {
     let url = req.url;
 
     if (url == "/") {
-        url = "/index.html";
+      url = "/index.html";
     }
 
     fs.readFile("./content" + url, (err, data) => {
