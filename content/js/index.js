@@ -16,6 +16,9 @@ var textarea = "";
     
     function keydown() {
         if (window.event.keyCode == 13) {
+            if(document.getElementById("chat_input_area").value.length == 0) {
+                return;
+            }
             let msg = document.getElementById("chat_input_area").value;
             document.getElementById("chat_input_area").value = null;
             wss.send(msg);

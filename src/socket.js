@@ -23,6 +23,9 @@ let ClientArray = new Array();
             if (msg.startsWith("ws2")) {
                 console.log(msg);
             }
+            if (msg.length == 0) {
+                return;
+            }
             console.log("[" + GetTime() + "]" + ip + " 로부터 받은 메세지 : " + msg);
             SendUserlist();
             BroadcastAll(msg, ip);
