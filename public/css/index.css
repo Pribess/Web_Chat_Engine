@@ -1,0 +1,16 @@
+body {
+    text-align: center;
+}
+#chat_online {
+    resize: none;
+    width: 10%;
+    height: 60%;
+}
+#chat_output_area {
+    resize: none;
+    width: 80%;
+    height: 60%;
+}
+#chat_input_area {
+    width: 90%;
+}

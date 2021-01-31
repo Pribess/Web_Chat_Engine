@@ -11,7 +11,7 @@ const app = http.createServer((req, res) => {
       url = "/index.html";
     }
 
-    fs.readFile("./content" + url, (err, data) => {
+    fs.readFile("./public" + url, (err, data) => {
         if (err) {
             console.error(err);
             res.writeHead(404);
